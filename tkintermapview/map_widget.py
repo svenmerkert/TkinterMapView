@@ -32,6 +32,7 @@ class TkinterMapView(tkinter.Frame):
                  database_path: str = None,
                  use_database_only: bool = False,
                  max_zoom: int = 19,
+                 hideZoomButtons: bool = False,
                  **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -85,8 +86,9 @@ class TkinterMapView(tkinter.Frame):
         self.canvas.grid(row=0, column=0, sticky="nsew")
 
         # zoom buttons
-        self.button_zoom_in = CanvasButton(self, (20, 20), text="+", command=self.button_zoom_in)
-        self.button_zoom_out = CanvasButton(self, (20, 60), text="-", command=self.button_zoom_out)
+        if (hideZoomButtons == False):
+            self.button_zoom_in = CanvasButton(self, (20, 20), text="+", command=self.button_zoom_in)
+            self.button_zoom_out = CanvasButton(self, (20, 60), text="-", command=self.button_zoom_out)
 
         # bind events for mouse button pressed, mouse movement, and scrolling
         self.canvas.bind("<B1-Motion>", self.mouse_move)
